@@ -1,0 +1,23 @@
+name: 'BentoDB Delete Database'
+description: 'Delete a database from BentoDB'
+branding:
+  icon: 'arrow-up-circle'
+  color: 'green'
+inputs:
+  api-token:
+    description: 'Your BentoDB API token'
+    required: true
+  database-id:
+    description: 'The ID of the database you want to delete'
+    required: true
+outputs:
+  database_id:
+    description: 'The ID of the deleted database'
+  database_name:
+    description: 'The name of the deleted database'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.api-token }}
+    - ${{ inputs.database-id }}

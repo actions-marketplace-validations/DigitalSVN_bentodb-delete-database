@@ -1,0 +1,22 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: '*'
+
+jobs:
+  example_job:
+    runs-on: ubuntu-latest
+    name: Delete a BentoDB database
+    steps:
+      - uses: actions/checkout@v3
+      - name: Create
+        id: create
+        uses: DigitalSVN/bentodb-delete-database@main
+        with:
+          api-token: ${{ secrets.BENTODB_API_TOKEN }}
+          database-id: 1035
+
+      - name: Output the deleted database name
+        run: echo "Database name - ${{ steps.create.outputs.database_name }}, ID - ${{ steps.create.outputs.database_id }}"
