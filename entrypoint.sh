@@ -20,7 +20,7 @@ echo "Deleting database..."
 
 http_response_code=$(curl --silent --write-out "%{http_code}" --output response.txt \
   -X DELETE \
-  --url "https://www.bentodb.com/api/databases/$API_TOKEN/delete" \
+  --url "https://www.bentodb.com/api/databases/$DATABASE_ID/delete" \
   -H "Accept: application/json" \
   -H 'Content-Type: application/json' \
   -H "Authorization: Bearer $API_TOKEN")
