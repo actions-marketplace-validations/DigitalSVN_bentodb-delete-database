@@ -8,15 +8,26 @@ on:
 jobs:
   example_job:
     runs-on: ubuntu-latest
-    name: Delete a BentoDB database
+    name: Create and then delete a database using BentoDB
     steps:
       - uses: actions/checkout@v3
+      - name: Create
+        id: create
+        uses: DigitalSVN/bentodb-create-database@main
+        with:
+          api-token: ${{ secrets.BENTODB_API_TOKEN }}
+          database-name: "${{ github.repository }}/${{ github.head_ref }}"
+
+      - name: Output the database name
+        run: echo "Database name - ${{ steps.create.outputs.database_name }}, ID - ${{ steps.create.outputs.database_id }}"
+        
       - name: Delete
         id: delete
         uses: DigitalSVN/bentodb-delete-database@main
         with:
           api-token: ${{ secrets.BENTODB_API_TOKEN }}
-          database-id: 1035
-
-      - name: Output the deleted database name
+          database-id: ${{ steps.create.outputs.database_id }}
+          
+      - name: Confirm deleted database name
         run: echo "Database name - ${{ steps.delete.outputs.database_name }}, ID - ${{ steps.delete.outputs.database_id }}"
+        
