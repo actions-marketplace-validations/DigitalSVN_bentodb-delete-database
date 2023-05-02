@@ -1,6 +1,6 @@
 # BentoDB - Delete Database
 
-A GitHub action to delete a database from [BentoDB](https://bentodb.com).
+A GitHub action to delete a database from [BentoDB](https://www.bentodb.com).
 
 ### Example usage
 For a full example see the README.md for the Create Database action: https://github.com/DigitalSVN/bentodb-create-database
